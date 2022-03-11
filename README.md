@@ -41,7 +41,45 @@ Using the results you have calculated on question 4 and the javascript library h
  - Java JDK 11 or higher
  - [Maven 3.8.0] (https://maven.apache.org/install.html)  
  
- 
+ ## Steps to Setup the Spring Boot Back end app (spacebank_api)
+
+1. **Clone the application**
+
+	```bash
+	git clone https://github.com/netshiaMR/solarcrud.git
+	cd solarcrud
+	```
+
+2. **Create MySQL database**
+
+	```bash
+CREATE DATABASE IF NOT EXISTS `terra_firma_assessmentdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `terra_firma_assessmentdb`; 
+
+or Import terra_firma_assessmentdb.sql to you mysql db
+	```
+
+3. **Change MySQL username and password as per your MySQL installation**
+
+	+ open `src/main/resources/application.properties` file.
+
+	+ change `spring.datasource.username` and `spring.datasource.password` properties as per your mysql installation
+
+4. **Run the app**
+
+	You can run the spring boot app by typing the following command -
+
+	```bash
+	mvn spring-boot:run
+	```
+
+	The server will start on port 8080.
+
+	You can also package the application in the form of a `jar` file and then run it like so -
+
+	```bash
+	mvn package
+	java -jar target
   
 
 
@@ -54,6 +92,8 @@ One way is to execute the `main` method in the `com.solar.crud.solarcrud.Solarcr
 Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
 
 This Spring boot MVC SOLERCRUD part of the project is deployed to Heroku Running at this URL https://solarcrud.herokuapp.com
+https://www.youtube.com/watch?v=9q3VcKxjnk0
+
 
 ```shell
 mvn spring-boot:run
