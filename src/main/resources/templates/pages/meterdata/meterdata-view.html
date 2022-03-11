@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Meters</title>
+	<link th:rel="stylesheet" th:href="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
+	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<style>
+		body {
+			font-family: 'Varela Round', sans-serif;
+		}
+
+		.modal-confirm {
+			color: #636363;
+			width: 400px;
+		}
+
+		.modal-confirm .modal-content {
+			padding: 20px;
+			border-radius: 5px;
+			border: none;
+			text-align: center;
+			font-size: 14px;
+		}
+
+		.modal-confirm .modal-header {
+			border-bottom: none;
+			position: relative;
+		}
+
+		.modal-confirm h4 {
+			text-align: center;
+			font-size: 26px;
+			margin: 30px 0 -10px;
+		}
+
+		.modal-confirm .close {
+			position: absolute;
+			top: -5px;
+			right: -2px;
+		}
+
+		.modal-confirm .modal-body {
+			color: #999;
+		}
+
+		.modal-confirm .modal-footer {
+			border: none;
+			text-align: center;
+			border-radius: 5px;
+			font-size: 13px;
+			padding: 10px 15px 25px;
+		}
+
+		.modal-confirm .modal-footer a {
+			color: #999;
+		}
+
+		.modal-confirm .icon-box {
+			width: 80px;
+			height: 80px;
+			margin: 0 auto;
+			border-radius: 50%;
+			z-index: 9;
+			text-align: center;
+			border: 3px solid #f15e5e;
+		}
+
+		.modal-confirm .icon-box i {
+			color: #f15e5e;
+			font-size: 46px;
+			display: inline-block;
+			margin-top: 13px;
+		}
+
+		.modal-confirm .btn,
+		.modal-confirm .btn:active {
+			color: #fff;
+			border-radius: 4px;
+			background: #60c7c1;
+			text-decoration: none;
+			transition: all 0.4s;
+			line-height: normal;
+			min-width: 120px;
+			border: none;
+			min-height: 40px;
+			border-radius: 3px;
+			margin: 0 5px;
+		}
+
+		.modal-confirm .btn-secondary {
+			background: #c1c1c1;
+		}
+
+		.modal-confirm .btn-secondary:hover,
+		.modal-confirm .btn-secondary:focus {
+			background: #a8a8a8;
+		}
+
+		.modal-confirm .btn-danger {
+			background: #f15e5e;
+		}
+
+		.modal-confirm .btn-danger:hover,
+		.modal-confirm .btn-danger:focus {
+			background: #ee3535;
+		}
+
+		.trigger-btn {
+			display: inline-block;
+			margin: 100px auto;
+		}
+	</style>
+</head>
+
+<body class="d-flex flex-column h-100">
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<div th:replace="~{fragments/header :: header}"></div>
+	<div class="container-fluid">
+		<div class="page-title">
+			<h6>View Meter Data</h6>
+		</div>
+		<section class="section">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col">
+						<div class="row mb-2">
+							<div class="col">
+								<a th:href="@{/editMeterDataFrom/{id}(id=${meterData.id})}" type="button"
+									class="btn btn-outline-primary btn-lg">Edit</a>
+							</div>
+							<div class="col">
+							
+							<a href="#myModal" data-toggle="modal" class="btn btn-outline-danger btn-lg"> Delete</a>
+							</div>
+							<div id="myModal" class="modal fade">
+								<div class="modal-dialog modal-confirm">
+									<div class="modal-content">
+										<div class="modal-header flex-column">
+											<div class="icon-box">
+												<i class="material-icons">&#xE5CD;</i>
+											</div>
+											<h4 class="modal-title w-100">Are you sure?</h4>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">&times;</button>
+										</div>
+										<div class="modal-body">
+											<p>Do you really want to delete these records? This process cannot
+												be undone.</p>
+										</div>
+										<div class="modal-footer justify-content-center">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Cancel</button>
+											<a th:href="@{/deleteMeterData/{id}(id=${meterData.id})}" title="Delete">
+												Delete</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card">
+							<div class="card-body">
+								<span>
+									<label>
+										<h6>ID</h6>
+									</label>&nbsp;&nbsp; [[${meterData.id}]]
+								</span>
+								<span>
+									<label>
+										<h6>Meter ID</h6>
+									</label>&nbsp;&nbsp; [[${meterData.meter.meterId}]]
+								</span>
+								<span>
+									<label>
+										<h6>Meter Name</h6>
+									</label>&nbsp;&nbsp; [[${meterData.meter.meterName}]]
+								</span>
+
+								<span>
+									<label>
+										<h6>Dates</h6>
+									</label>&nbsp;&nbsp; [[${meterData.tStamp}]]
+								</span>
+								&nbsp;&nbsp;
+								<span>
+									<label>
+										<h6>Cost</h6>
+									</label>&nbsp;&nbsp; [[${meterData.cost}]]
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col">
+						<ul class="list-group">
+
+							<li class="list-group-item"> <label>Vah</label>&nbsp;&nbsp; [[${meterData.vah}]]
+							</li>
+							<li class="list-group-item">
+								<lable>STOS</lable>&nbsp;&nbsp; [[${meterData.stot}]]
+							</li>
+							<li class="list-group-item">
+								<lable>RatePerKwh</lable> &nbsp;&nbsp; [[${meterData.ratePerKwh}]]
+							</li>
+							<li class="list-group-item">
+								<lable>qtot</lable>&nbsp;&nbsp; [[${meterData.qtot}]]
+							</li>
+							<li class="list-group-item">
+								<lable>q1varh</lable>&nbsp;&nbsp;[[${meterData.q1varh}]]
+							</li>
+							<li class="list-group-item">
+								<lable>q2varh </lable>&nbsp;&nbsp;[[${meterData.q2varh}]]
+							</li>
+							<li class="list-group-item">
+								<lable>q3varh </lable>&nbsp;&nbsp;[[${meterData.q3varh}]]
+							</li>
+							<li class="list-group-item">
+								<lable>q4varh </lable>&nbsp;&nbsp;[[${meterData.q4varh}]]
+							</li>
+							<li class="list-group-item">
+								<lable>ptot </lable>&nbsp;&nbsp;[[${meterData.ptot}]]
+							</li>
+						</ul>
+					</div>
+					<div class="col">
+						<ul class="list-group">
+							<li class="list-group-item">
+								<lable>Kwh </lable>&nbsp;&nbsp; [[${meterData.kwh}]]
+							</li>
+						</ul>
+						<li class="list-group-item">
+							<lable>Impwh </lable>&nbsp;&nbsp;[[${meterData.impwh}]]
+						</li>
+						<li class="list-group-item">
+							<lable>Impkvarh </lable>&nbsp;&nbsp;[[${meterData.impkvarh}]]
+						</li>
+						<li class="list-group-item">
+							<lable>Expwh </lable>&nbsp;&nbsp;[[${meterData.expwh}]]
+						</li>
+						<li class="list-group-item">
+							<lable>Expkvarh </lable>&nbsp;&nbsp;[[${meterData.expkvarh}]]
+						</li>
+						<li class="list-group-item">
+							<lable>EpochTstamp </lable>&nbsp;&nbsp;[[${meterData.epochTstamp}]]
+						</li>
+						<li class="list-group-item">
+							<lable>DifferenceImpKwh </lable>&nbsp;&nbsp;[[${meterData.differenceImpKwh}]]
+						</li>
+						<li class="list-group-item">
+							<lable>DifferenceExpKwh </lable>&nbsp;&nbsp;[[${meterData.differenceExpKwh}]]
+						</li>
+						<li class="list-group-item">
+							<lable>DerivedData </lable>&nbsp;&nbsp;[[${meterData.derivedData}]]
+						</li>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script th:src="@{/assets/moment/moment.min.js}"></script>
+	<script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" language="javascript"
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#meterdatatable').DataTable({
+				"pagingType": "full_numbers"
+			});
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Meters</title>
+	<link th:rel="stylesheet" th:href="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
+	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+	<link th:href="@{styles/main.css}" rel="stylesheet" />
+</head>
+
+<body class="d-flex flex-column h-100">
+	<div th:replace="~{fragments/header :: header}"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col">
+				<form class="row g-3" th:action="@{/update}" th:object="${meterDataRequest}" method="POST">
+					<div class="col-md-4">
+						<label for="validationServer01" class="form-label">Meter ID</label>
+						<input th:field="*{id}" type="hidden" class="form-control is-valid"/>
+						<input th:field="*{meterId}" type="text" class="form-control is-valid" id="validationServer01"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label   for="date">Date: </label>
+							<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+								
+								<input type="text" class="form-control datetimepicker-input"
+									data-target="#datetimepicker1" th:field="*{tStamp}" id="tStamp"
+									placeholder="Date" />
+								<div class="input-group-append" data-target="#datetimepicker1"
+									data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">Vah </label>
+						<input th:field="*{vah}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">RatePerKwh </label>
+						<input th:field="*{ratePerKwh}" type="text" class="form-control is-valid"
+							id="validationServer02" required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">qtot </label>
+						<input th:field="*{qtot}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">q1varh </label>
+						<input th:field="*{q1varh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">q2varh </label>
+						<input th:field="*{q2varh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">q3varh </label>
+						<input th:field="*{q3varh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">q4varh </label>
+						<input th:field="*{q4varh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">ptot </label>
+						<input th:field="*{ptot}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">Kwh </label>
+						<input th:field="*{kwh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">Impwh </label>
+						<input th:field="*{impwh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">Impkvarh </label>
+						<input th:field="*{impkvarh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">Expwh </label>
+						<input th:field="*{expwh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">Expkvarh </label>
+						<input th:field="*{expkvarh}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">EpochTstamp </label>
+						<input th:field="*{epochTstamp}" type="text" class="form-control is-valid"
+							id="validationServer02" required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">DifferenceImpKwh </label>
+						<input th:field="*{differenceImpKwh}" type="text" class="form-control is-valid"
+							id="validationServer02" required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">DifferenceExpKwh </label>
+						<input th:field="*{differenceExpKwh}" type="text" class="form-control is-valid"
+							id="validationServer02" required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">DerivedData </label>
+						<input th:field="*{derivedData}" type="text" class="form-control is-valid"
+							id="validationServer02" required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">STOT </label>
+						<input th:field="*{stot}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label for="validationServer02" class="form-label">Cost </label>
+						<input th:field="*{cost}" type="text" class="form-control is-valid" id="validationServer02"
+							required>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
+					</div>
+					<div class="col-12">
+						<button class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/moment/moment.min.js}"></script>
+	<script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+
+	<script>
+		$.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+			icons: {
+				time: 'far fa-clock',
+				date: 'far fa-calendar',
+				up: 'fas fa-arrow-up',
+				down: 'fas fa-arrow-down',
+				previous: 'fas fa-chevron-left',
+				next: 'fas fa-chevron-right',
+				today: 'far fa-calendar-check-o',
+				clear: 'far fa-trash',
+				close: 'far fa-times'
+			}
+		});
+
+		$('#datetimepicker1').datetimepicker({
+			format: 'DD/MM/YYYY HH:mm:ss'
+		});
+	</script>
+</body>
+
+</html>

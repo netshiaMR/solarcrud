@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Meters</title>
+	<link th:rel="stylesheet" th:href="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
+	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+	<link th:href="@{styles/main.css}" rel="stylesheet" />
+</head>
+
+<body class="d-flex flex-column h-100">
+	<div th:replace="~{fragments/header :: header}"></div>
+	<br />
+	<div class="container">
+		<h2>Create a new meter</h2>
+		<div class="mb-3">
+			<form action="#" th:action="@{/save}" th:object="${meter}" method="POST">
+				<input type="text" th:field="*{meterId}" placeholder="Meter ID" class="form-control mb-4 col-4">
+				<input type="text" th:field="*{meterName}" placeholder="Meter Name" class="form-control mb-4 col-4">
+				<button type="submit" class="btn btn-success"> Save</button>
+			</form>
+		</div>
+		<br />
+		<div class="container-fluid row justify-content-md-center">
+			<a th:href="@{/meters}" type="button" class="btn btn-dark"> Back to Meters List</a>
+		</div>
+	</div>
+
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/moment/moment.min.js}"></script>
+	<script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+</body>
+
+</html>

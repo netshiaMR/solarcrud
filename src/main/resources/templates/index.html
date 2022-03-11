@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Meter </title>
+	<link th:rel="stylesheet" th:href="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}" />
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
+	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+
+<body class="d-flex flex-column h-100">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<div th:replace="~{fragments/header :: header}"> </div>
+
+	<div class="container-fluid">
+		<div class="page-title">
+			<h3>Dashboard</h3>
+			<p class="text-subtitle text-muted">Statistics </p>
+
+		</div>
+		<section class="section">
+			<div class="row mb-2">
+				<div class="col-12 col-md-3">
+					<div class="card card-statistic">
+						<div class="card-body p-0">
+							<div class="d-flex flex-column">
+								<div class='px-3 py-3 d-flex justify-content-between'>
+									<h5 class='card-title'>AVAILABLE METERS </h5>
+									<div class="card-right d-flex align-items-center">
+										<h6>[[${metersize}]] </h6>
+									</div>
+								</div>
+								<div class="justify-content-md-center">
+									<a th:href="@{/meters}" type="button" class="btn btn-dark"> View Meter</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-3">
+					<div class="card card-statistic">
+						<div class="card-body p-0">
+							<div class="d-flex flex-column">
+								<div class='px-3 py-3 d-flex justify-content-between'>
+									<h5 class='card-title'>AVAILABLE METER DATA</h5>
+									<div class="card-right d-flex align-items-center">
+										<h6>[[${meterdatasize}]] </h6>
+									</div>
+								</div>
+								<div class="justify-content-md-center">
+									<a th:href="@{/meterdata}" type="button" class="btn btn-dark"> Meter Data</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-3">
+					<div class="card card-statistic">
+						<div class="card-body p-0">
+							<div class="d-flex flex-column">
+								<div class='px-3 py-3 d-flex justify-content-between'>
+									<h5 class='card-title'>Highs Meter Cost</h5>
+									<div class="card-right d-flex align-items-center">
+										<h6>[[${meterdatasize}]] </h6>
+									</div>
+								</div>
+								<div class="justify-content-md-center">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-3">
+					<div class="card card-statistic">
+						<div class="card-body p-0">
+							<div class="d-flex flex-column">
+								<div class='px-3 py-3 d-flex justify-content-between'>
+									<h5 class='card-title'>Hourly Avg Kwh</h5>
+									<div class="card-right d-flex align-items-center">
+										<h6>[[${meterdatasize}]] </h6>
+									</div>
+								</div>
+								<div class="justify-content-md-center">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-4">
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h4 class="card-title">Cost Energy produced per hour</h4>
+							<div class="d-flex ">
+								<i data-feather="download"></i>
+							</div>
+						</div>
+						<div id="hourlySummeryChart" class="card-body px-0 pb-0">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row mb-4">
+				<div class="col-md-7">
+					<div class="card">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h4 class="card-title">Daily Meter Energy Produced</h4>
+							<div class="d-flex ">
+								<i data-feather="download"></i>
+							</div>
+						</div>
+						<div class="card-body px-0 pb-0">
+							<div class="table-responsive">
+								<table class="table table-hover table-responsive-md meterdatatable">
+									<thead>
+										<tr>
+											<th>Meter id</th>
+											<th>Meter Name</th>
+											<th>Date hour</th>
+											<th>Min kwh</th>
+											<th>Max kwh</th>
+											<th>Avg kwh</th>
+											<th>Total</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="meter : ${dailyMeterKwhs}">
+											<td th:text="${meter.meter_id}"></td>
+											<td th:text="${meter.meterName}"></td>
+											<td th:text="${meter.datehour}"></td>
+											<td th:text="${meter.min}"></td>
+											<td th:text="${meter.max}"></td>
+											<td th:text="${meter.avg}"></td>
+											<td th:text="${meter.total}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="card">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h4 class="card-title">Daily Meter Energy Produced</h4>
+							<div class="d-flex ">
+								<i data-feather="download"></i>
+							</div>
+						</div>
+						<div id="dailyEnegryChart" class="card-body px-0 pb-0">
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-4">
+				<div class="col-md-7">
+					<div class="card">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h4 class="card-title">Daily Meter Cost</h4>
+							<div class="d-flex ">
+								<i data-feather="download"></i>
+							</div>
+						</div>
+						<div class="card-body px-0 pb-0">
+							<div class="table-responsive">
+								<table class="table table-hover table-responsive-md meterdatatable">
+									<thead>
+										<tr>
+											<th>Meter id</th>
+											<th>Meter Name</th>
+											<th>Date hour</th>
+											<th>Min Cost</th>
+											<th>Max Cost</th>
+											<th>Avg Cost</th>
+											<th>Total</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="meter : ${dailyMeterCosts}">
+											<td th:text="${meter.meter_id}"></td>
+											<td th:text="${meter.meterName}"></td>
+											<td th:text="${meter.datehour}"></td>
+											<td th:text="${meter.min}"></td>
+											<td th:text="${meter.max}"></td>
+											<td th:text="${meter.avg}"></td>
+											<td th:text="${meter.total}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="card">
+						<div class="card-header d-flex justify-content-between align-items-center">
+							<h4 class="card-title">Daily Meter Energy Produced</h4>
+							<div class="d-flex ">
+								<i data-feather="download"></i>
+							</div>
+						</div>
+						<div id="dailyCostChart" class="card-body px-0 pb-0">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+	</diV>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/moment/moment.min.js}"></script>
+	<script th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" language="javascript"
+		src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.meterdatatable').DataTable({
+				"pagingType": "full_numbers"
+			});
+		});
+	</script>
+	<script th:inline="javascript">
+		$(function () {
+			Highcharts.chart('hourlySummeryChart', {
+				chart: {
+					type: 'column'
+				},
+				title: {
+					text: 'Meter'
+				},
+				subtitle: {
+					text: 'Total Hourly Cost'
+				},
+				xAxis: {
+					categories: [[${hourlySummeryKey}]],
+					crosshair: true
+				},
+				yAxis: {
+					min: 0,
+					max: 5000,
+					title: {
+						text: 'Total Cost & kwh'
+					}
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+						'<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+					footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				},
+				plotOptions: {
+					column: {
+						pointPadding: 0.2,
+						borderWidth: 0
+					}
+				},
+				series: [{
+					name: 'Meters',
+					data: [[${hourlySummeryValue}]]
+				}]
+			});
+		});
+		$(function () {
+			Highcharts.chart('dailyEnegryChart', {
+				chart: {
+					type: 'column'
+				},
+				title: {
+					text: 'Meter'
+				},
+				subtitle: {
+					text: 'Total Energy Produced Daily'
+				},
+				xAxis: {
+					categories: [[${kwhkeySet}]],
+					crosshair: true
+				},
+				yAxis: {
+					min: 0,
+					max: 5000,
+					title: {
+						text: 'Total Kwh'
+					}
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+						'<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+					footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				},
+				plotOptions: {
+					column: {
+						pointPadding: 0.2,
+						borderWidth: 0
+					}
+				},
+				series: [{
+					name: 'Meters',
+					data: [[${kwhvalues}]]
+				}]
+			});
+		});
+
+		$(function () {
+			Highcharts.chart('dailyCostChart', {
+				chart: {
+					type: 'column'
+				},
+				title: {
+					text: 'Meter'
+				},
+				subtitle: {
+					text: 'Total Daily Cost'
+				},
+				xAxis: {
+					categories: [[${costkeySet}]],
+					crosshair: true
+				},
+				yAxis: {
+					min: 0,
+					max: 5000,
+					title: {
+						text: 'Total Cost'
+					}
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+						'<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
+					footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				},
+				plotOptions: {
+					column: {
+						pointPadding: 0.2,
+						borderWidth: 0
+					}
+				},
+				series: [{
+					name: 'Meters',
+					data: [[${costvalues}]]
+				}]
+			});
+		});
+	</script>
+</body>
+
+</html>
